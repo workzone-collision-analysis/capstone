@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>NYC Collision and 511 events Dashboard</title>
+    <link href="src/css/bootstrap-grid.min.css" rel="stylesheet">
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v1.11.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v1.11.0/mapbox-gl.css' rel='stylesheet'/>
+    <link href='src/css/main.css' rel='stylesheet'/>
+</head>
+<body>
+    <main class="container-fluid">
+        <div class="row">
+            <section class="col-md-12 col-lg-8" id="map">
+                <div id="map__dropdown">
+                    <select>
+                        <option>Crash</option>
+                        <option>511</option>
+                    </select>
+
+                </div>
+                <div id="map__map">
+
+                </div>
+                <div id="map__legend">
+
+                </div>
+            </section>
+            <section class="col-md-12 col-lg-4" id="chart__entire">
+
+            </section>
+            <section class="col-md-12 col-lg-4" id="chart__street">
+                <div id="chart__street-info" class="chart__section">
+                    <div class="chart__section-title">
+                        <h1>Street Characteristic</h1>
+                    </div>
+                    <div id="street-info__main">
+                        <div class="street-info__main-column">
+                            <p>Roadway Type: <span></span></p>
+                            <p>Posted Speed: <span></span></p>
+                            <p>Street Width: <span></span></p>
+                        </div>
+                        <div class="street-info__main-column">
+                            <p>Roadway Type: <span></span></p>
+                            <p>Posted Speed: <span></span></p>
+                            <p>Street Width: <span></span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="chart__section">
+                    <div class="chart__section-title">
+                        <h1>Chart 1</h1>
+                    </div>
+                </div>
+                <div class="chart__section">
+                    <div class="chart__section-title">
+                        <h1>Chart 2</h1>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+    <script src="src/js/map.js"></script>
+    <script src="src/js/chart.js"></script>
+</body>
+</html>

@@ -1,0 +1,1 @@
+document.getElementById('street-info__title').addEventListener('click',);

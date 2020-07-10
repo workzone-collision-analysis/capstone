@@ -1,0 +1,34 @@
+#chart__street{
+    box-sizing: border-box;
+    border-left:1px solid #CCCCCC;
+    padding:0;
+    display:flex;
+}
+
+.chart__section{
+    color:#212121;
+    border-bottom: 1px solid #CCCCCC;
+}
+
+.chart__section-title{
+    padding:20px;
+    display:flex;
+    justify-content: space-between;
+    cursor:pointer;
+    color:#2962FF;
+    font-size:20px;
+    font-weight:700;
+}
+
+#street-info__main{
+    display:flex;
+}
+
+.street-info__main-column{
+    padding: 0 20px 5px 20px;
+    width:45%;
+}
+
+#street-info__main p{
+    margin-bottom: 15px;
+}

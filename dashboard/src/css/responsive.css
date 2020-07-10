@@ -1,0 +1,33 @@
+@media screen and (min-width:991px){
+    #map{
+        height:100%;
+    }
+    #chart__street, #chart__entire{
+        height:100%;
+        flex-direction: column;
+    }
+    .chart__section{
+        width:100%;
+    }
+}
+
+@media screen and (max-width:991px){
+    #map{
+        height:60%;
+    }
+    #chart__street, #chart__entire{
+        height:40%;
+        flex-direction: row;
+    }
+
+    .chart__section{
+        width:33%;
+    }
+
+    .chart__section:nth-child(2){
+        border-left: 1px solid #CCCCCC;
+        border-right: 1px solid #CCCCCC;
+    }
+
+
+}

@@ -11,7 +11,7 @@
     }
 }
 
-@media screen and (max-width:991px){
+@media screen and (min-width:751px) and (max-width:991px){
     #map{
         height:60%;
     }
@@ -29,5 +29,19 @@
         border-right: 1px solid #CCCCCC;
     }
 
+}
 
+@media screen and (max-width:750px) {
+    #map {
+        height: 500px;
+    }
+
+    #chart__street, #chart__entire {
+        min-height:40%;
+        flex-direction: column;
+    }
+
+    .chart__section {
+        width: 100%;
+    }
 }

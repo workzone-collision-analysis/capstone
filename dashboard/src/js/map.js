@@ -9,4 +9,36 @@ const map = new mapboxgl.Map({
     center: [-73.997482, 40.730880]
 });
 
-map.on('load', function () {});
+const shortSegmentURL = "src/data/short_segment.geojson";
+const shstNodeURL = "src/data/shst_node.geojson";
+
+map.on('load', function (){
+    window.setInterval(function() {
+        map.getSource('shortSegment').setData(shortSegmentURL);
+        map.getSource('shstNode').setData(shstNodeURL);
+    }, 2000);
+
+    map.addSource('shortSegment', { type: 'geojson', data:shortSegmentURL , 'promoteId': 'short_segment_id'});
+    map.addSource('shstNode', { type: 'geojson', data:shstNodeURL , 'promoteId': 'node_id'});
+
+    map.addLayer({
+        "id": "shortSegment",
+        "source": "shortSegment",
+        "type": "circle",
+        "paint": {
+            "circle-color": "#F44336",
+            "circle-radius":4
+        }
+    });
+
+    map.addLayer({
+        "id": "shstNode",
+        "source": "shstNode",
+        "type": "circle",
+        "paint": {
+            "circle-color": "#2196F3",
+            "circle-radius":4
+        }
+    });
+
+});

@@ -18,7 +18,7 @@
         <div class="row">
             <section class="col-md-12 col-lg-8" id="map">
                 <div id="map__dropdown">
-                    <select>
+                    <select onchange="changeMap(this)">
                         <option>Crash</option>
                         <option>511</option>
                     </select>
@@ -27,7 +27,46 @@
                 <div id="map__map">
 
                 </div>
-                <div id="map__legend">
+                <div class="map__legend" id="map__legend-crash">
+                    <h4>Number of Crashes</h4>
+                    <div class="map__legend-row">
+                        <svg width="12" height="12" fill="#81C784">
+                            <rect x="0" y="0" width="12" height="12"/>
+                        </svg>
+                        <span>0</span>
+                    </div>
+                    <div class="map__legend-row">
+                        <svg width="12" height="12" fill="#FCBBA1">
+                            <rect x="0" y="0" width="12" height="12"/>
+                        </svg>
+                        <span>1 ~ 10</span>
+                    </div>
+                    <div class="map__legend-row">
+                        <svg width="12" height="12" fill="#FC9272">
+                            <rect x="0" y="0" width="12" height="12"/>
+                        </svg>
+                        <span>11~20</span>
+                    </div>
+                    <div class="map__legend-row">
+                        <svg width="12" height="12" fill="#FB6A4A">
+                            <rect x="0" y="0" width="12" height="12"/>
+                        </svg>
+                        <span>21~30</span>
+                    </div>
+                    <div class="map__legend-row">
+                        <svg width="12" height="12" fill="#DE2D26">
+                            <rect x="0" y="0" width="12" height="12"/>
+                        </svg>
+                        <span>31~40</span>
+                    </div>
+                    <div class="map__legend-row">
+                        <svg width="12" height="12" fill="#A50F15">
+                            <rect x="0" y="0" width="12" height="12"/>
+                        </svg>
+                        <span>41 ~</span>
+                    </div>
+                </div>
+                <div class="map__legend" id="map__legend-511">
 
                 </div>
             </section>

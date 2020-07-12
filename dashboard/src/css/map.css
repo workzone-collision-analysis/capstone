@@ -26,12 +26,36 @@
     padding:0 5px;
 }
 
-#map__legend{
+.map__legend{
     position:absolute;
     top:10px;
-    height:200px;
     width:150px;
     right:10px;
-    background-color: rgba(255,255,255,0.8);
+    background-color: rgba(255,255,255,0.9);
     z-index: 1;
+    display:flex;
+    flex-direction: column;
+    padding-bottom:10px;
+}
+
+.map__legend h4{
+    margin-top:10px;
+    margin-left:10px;
+    font-size:14px;
+    font-weight:700;
+}
+
+.map__legend-row{
+    display:flex;
+    flex-direction: row;
+    margin-left:10px;
+    margin-top:12px;
+    font-size:14px;
+}
+
+.map__legend-row svg{
+    margin-right:10px;
+}
+#map__legend-511{
+    display:none;
 }

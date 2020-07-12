@@ -17,16 +17,10 @@
     }
     #chart__street, #chart__entire{
         height:40%;
-        flex-direction: row;
+        flex-direction: column;
     }
-
     .chart__section{
-        width:33%;
-    }
-
-    .chart__section:nth-child(2){
-        border-left: 1px solid #CCCCCC;
-        border-right: 1px solid #CCCCCC;
+        width:100%;
     }
 
 }
@@ -40,8 +34,7 @@
         min-height:40%;
         flex-direction: column;
     }
-
-    .chart__section {
-        width: 100%;
+    .chart__section{
+        width:100%;
     }
 }

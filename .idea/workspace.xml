@@ -3,10 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="77c3bda3-076c-448a-8b68-0507f36a24f1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/src/css/chart__street.css" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/css/chart__street.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/src/data/shst_node_filtered.geojson" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/src/data/shst_segment_filtered_simplified.geojson" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/src/data/shst_short_segment_centroid.geojson" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dashboard/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dashboard/src/css/map.css" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/css/map.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dashboard/src/css/responsive.css" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/css/responsive.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dashboard/src/js/map.js" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/js/map.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -71,6 +70,7 @@
       <workItem from="1594433147310" duration="63000" />
       <workItem from="1594479375979" duration="1272000" />
       <workItem from="1594519897666" duration="123000" />
+      <workItem from="1594520306731" duration="3369000" />
     </task>
     <servers />
   </component>

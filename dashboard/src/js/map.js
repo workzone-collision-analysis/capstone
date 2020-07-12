@@ -9,10 +9,10 @@ const map = new mapboxgl.Map({
     center: [-73.997482, 40.730880]
 });
 
-const shortSegmentCentroidURL = "src/data/shst_short_segment_centroid.geojson";
+const shortSegmentCentroidURL = "src/data/short_segment_centroid.geojson";
 const shortSegmentURL = "src/data/shst_short_segment.geojson";
-const segmentURL = "src/data/shst_segment_filtered_simplified.geojson";
-const shstNodeURL = "src/data/shst_node_filtered.geojson";
+const segmentURL = "src/data/segment.geojson";
+const shstNodeURL = "src/data/node.geojson";
 
 map.on('load', function (){
     window.setInterval(function() {
@@ -32,8 +32,14 @@ map.on('load', function (){
         "source": "segment",
         "type": "line",
         "paint": {
-            "line-color": '#424242',
-            "line-width": 2
+            "line-color": ["case",
+                ["==",["get","count"],0], "#81C784",
+                ["<", ["get","count"], 10], "#fcbba1",
+                ["<", ["get","count"], 20], "#fc9272",
+                ["<", ["get","count"], 30], "#fb6a4a",
+                ["<", ["get","count"], 40], "#de2d26",
+                "#a50f15"],
+            "line-width": 3
         }
     });
 
@@ -54,7 +60,13 @@ map.on('load', function (){
         "source": "shortSegmentCentroid",
         "type": "circle",
         "paint": {
-            "circle-color": "#F44336",
+            "circle-color": ["case",
+                ["==",["get","count"],0], "#81C784",
+                ["<", ["get","count"], 10], "#fcbba1",
+                ["<", ["get","count"], 20], "#fc9272",
+                ["<", ["get","count"], 30], "#fb6a4a",
+                ["<", ["get","count"], 40], "#de2d26",
+                "#a50f15"],
             "circle-radius":5
         }
     });
@@ -64,7 +76,13 @@ map.on('load', function (){
         "source": "shstNode",
         "type": "circle",
         "paint": {
-            "circle-color": "#2196F3",
+            "circle-color": ["case",
+                ["==",["get","count"],0], "#81C784",
+                ["<", ["get","count"], 10], "#fcbba1",
+                ["<", ["get","count"], 20], "#fc9272",
+                ["<", ["get","count"], 30], "#fb6a4a",
+                ["<", ["get","count"], 40], "#de2d26",
+                "#a50f15"],
             "circle-radius":5
         }
     });

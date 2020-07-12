@@ -3,6 +3,7 @@
     border-left:1px solid #CCCCCC;
     padding:0;
     display:flex;
+    cursor:default;
 }
 
 .chart__section{
@@ -14,7 +15,6 @@
     padding:20px;
     display:flex;
     justify-content: space-between;
-    cursor:pointer;
     color:#2962FF;
     font-size:20px;
     font-weight:700;

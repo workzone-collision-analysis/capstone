@@ -145,6 +145,8 @@ map.on('load', function () {
         monthlyCrashChart(monthlyCrash);
         const hourlyCrash = store['hourlyCrash'].filter(d=>d.id === clicked_feature.id);
         hourlyCrashChart(hourlyCrash);
+        const hourlyInjured = store['hourlyInjured'].filter(d=>d.id === clicked_feature.id);
+        hourlyInjuredChart(hourlyInjured);
     });
 
     map.on('touchstart', 'shortSegment', function (e) {

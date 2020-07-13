@@ -4,7 +4,6 @@
     padding:0;
     display:flex;
     cursor:default;
-    overflow-y:scroll;
 }
 
 .chart__section{
@@ -45,14 +44,14 @@
 
 .chart__section-main canvas{
     padding: 5px 10px 0 10px;
-    height:150px;
+    height:140px;
 }
 
 #chart_hour{
-    height:140px;
+    height:130px;
 }
 
 #chart_injured{
-    height:140px;
+    height:130px;
 }
 

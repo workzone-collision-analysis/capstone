@@ -20,7 +20,7 @@
     font-weight:700;
 }
 
-#street-info__main{
+.chart__section-main{
     display:flex;
 }
 
@@ -29,6 +29,11 @@
     width:45%;
 }
 
-#street-info__main p{
+.chart__section-main p{
     margin-bottom: 15px;
+}
+
+.chart__section-main canvas{
+    padding: 10px 10px;
+    height:200px;
 }

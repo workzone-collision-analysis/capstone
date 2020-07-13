@@ -9,8 +9,9 @@ const map = new mapboxgl.Map({
     center: [-73.997482, 40.730880]
 });
 
-const shortSegmentCentroidURL = 'src/data/short_segment_centroid.geojson';
-const shortSegmentURL = 'src/data/shst_short_segment.geojson';
+// set the URL of the datasets
+const shortSegmentCentroidURL = 'src/data/short_segment.geojson';
+const shortSegmentURL = 'src/data/short_segment_line.geojson';
 const segmentURL = 'src/data/segment.geojson';
 const shstNodeURL = 'src/data/node.geojson';
 
@@ -46,6 +47,16 @@ map.on('load', function () {
         }
     });
 
+    map.addLayer({
+        'id': 'segment_transparent',
+        'source': 'segment',
+        'type': 'line',
+        'paint': {
+            'line-color': "rgba(0,0,0,0)",
+            'line-width': 10
+        }
+    });
+
 
     map.addLayer({
         'id': 'shortSegment',
@@ -75,6 +86,27 @@ map.on('load', function () {
     });
 
     map.addLayer({
+        'id': 'shortSegmentCentroid_transparent',
+        'source': 'shortSegmentCentroid',
+        'type': 'circle',
+        'paint': {
+            'circle-color': 'rgba(0,0,0,0)',
+            'circle-radius': 8
+        }
+    });
+
+    map.addLayer({
+        'id': 'node_transparent',
+        'source': 'node',
+        'type': 'circle',
+        'paint': {
+            'circle-color': 'rgba(0,0,0,0)',
+            'circle-radius': 8
+        }
+    });
+
+
+    map.addLayer({
         'id': 'node',
         'source': 'node',
         'type': 'circle',
@@ -90,53 +122,66 @@ map.on('load', function () {
         }
     });
 
-
-    map.on('click', 'segment', function (e) {
+    // these are related to click activities on each layers
+    map.on('click', 'segment_transparent', function (e) {
         let clicked_feature = e.features[0];
-        console.log(clicked_feature);
+        const target = store['segment_attribute'].filter(d=>d.id === clicked_feature.id)[0];
+        update_attribute(target);
     });
 
-    map.on('click', 'node', function (e) {
+    map.on('click', 'node_transparent', function (e) {
         let clicked_feature = e.features[0];
-        console.log(clicked_feature);
+        console.log(clicked_feature.id);
     });
 
-
-    map.on('click', 'shortSegment', function (e) {
+    map.on('click', 'shortSegmentCentroid_transparent', function (e) {
         let clicked_feature = e.features[0];
-        console.log(clicked_feature);
-    });
-
-    map.on('click', 'shortSegmentCentroid', function (e) {
-        let clicked_feature = e.features[0];
-        console.log(clicked_feature);
+        const target = store['segment_attribute'].filter(d=>d.id === clicked_feature.id)[0];
+        const monthlyCrash = store['monthlyCrash'].filter(d=>d.id === clicked_feature.id);
+        document.getElementById('street-info__Crash').innerText = clicked_feature.properties.count;
+        update_attribute(target);
+        monthlyCrashChart(monthlyCrash);
+        const hourlyCrash = store['hourlyCrash'].filter(d=>d.id === clicked_feature.id);
+        console.log('warning');
+        hourlyCrashChart(hourlyCrash);
     });
 
     map.on('touchstart', 'shortSegment', function (e) {
         let clicked_feature = e.features[0];
-        console.log(clicked_feature);
+        console.log(clicked_feature.id);
     });
 
     map.on('touchstart', 'shortSegmentCentroid', function (e) {
         let clicked_feature = e.features[0];
-        console.log(clicked_feature);
+        console.log(clicked_feature.id);
     });
+
 });
 
+// this function is for the dropbox menu
 function changeMap(source){
     if(source.value==='511'){
         map.setLayoutProperty('segment', 'visibility', 'none');
         map.setLayoutProperty('node', 'visibility', 'none');
         map.setLayoutProperty('shortSegment', 'visibility', 'none');
         map.setLayoutProperty('shortSegmentCentroid', 'visibility', 'none');
+        map.setLayoutProperty('shortSegmentCentroid_transparent', 'visibility', 'none');
+        map.setLayoutProperty('node_transparent', 'visibility', 'none');
+        map.setLayoutProperty('segment_transparent', 'visibility', 'none');
         document.getElementById('map__legend-crash').style.display='none';
         document.getElementById('map__legend-511').style.display='flex';
+        if(map.getLayer('511')=== undefined){
+            console.log('BAAAM');
+        }
     }
     else{
         map.setLayoutProperty('segment', 'visibility', 'visible');
         map.setLayoutProperty('node', 'visibility', 'visible');
         map.setLayoutProperty('shortSegment', 'visibility', 'visible');
         map.setLayoutProperty('shortSegmentCentroid', 'visibility', 'visible');
+        map.setLayoutProperty('shortSegmentCentroid_transparent', 'visibility', 'visible');
+        map.setLayoutProperty('node_transparent', 'visibility', 'visible');
+        map.setLayoutProperty('segment_transparent', 'visibility', 'visible');
         document.getElementById('map__legend-crash').style.display='flex';
         document.getElementById('map__legend-511').style.display='none';
     }

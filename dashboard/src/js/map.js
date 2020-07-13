@@ -14,6 +14,8 @@ const shortSegmentCentroidURL = 'src/data/short_segment.geojson';
 const shortSegmentURL = 'src/data/short_segment_line.geojson';
 const segmentURL = 'src/data/segment.geojson';
 const shstNodeURL = 'src/data/node.geojson';
+const crashZero511 = 'src/data/511_zero.geojson';
+const crashNotZero511 = 'src/data/511_not_zero.geojson';
 
 const colorArray = ['#81C784', '#FCBBA1', '#FC9272', '#FB6A4A', '#DE2D26', '#A50F15'];
 const breakPointArray = ['0','1~10','11~20','21~30','31~40','40~'];
@@ -167,7 +169,40 @@ function changeMap(source){
         map.setLayoutProperty('segment_transparent', 'visibility', 'none');
         document.getElementById('map__legend-crash').style.display='none';
         document.getElementById('map__legend-511').style.display='flex';
-        if(map.getLayer('511')=== undefined){
+        if(map.getLayer('511zero')=== undefined){
+            map.addSource('511zero', {type: 'geojson', data: crashZero511, 'promoteId': 'event_id'});
+            map.addSource('511NotZero', {type: 'geojson', data: crashNotZero511, 'promoteId': 'event_id'});
+
+            map.addLayer({
+                'id': '511zero',
+                'source': '511zero',
+                'type': 'circle',
+                'paint': {
+                    "circle-opacity": 0,
+                    "circle-stroke-width": 2,
+                    "circle-stroke-color": '#F44336',
+                    'circle-radius': 2
+                }
+            });
+
+
+            map.addLayer({
+                'id': '511NotZero',
+                'source': '511NotZero',
+                'type': 'circle',
+                'paint': {
+                    "circle-color": '#F44336',
+                    "circle-stroke-width": 2,
+                    "circle-stroke-color": '#F44336',
+                    'circle-radius': ['case',
+                        ['<', ['get', 'crash_count_900ft'], 2], 2,
+                        ['<', ['get', 'count'], 4], 4, 8]
+                }
+            });
+        }
+       else{
+            map.setLayoutProperty('511zero', 'visibility', 'visible');
+            map.setLayoutProperty('511NotZero', 'visibility', 'visible');
         }
     }
     else{
@@ -178,6 +213,8 @@ function changeMap(source){
         map.setLayoutProperty('shortSegmentCentroid_transparent', 'visibility', 'visible');
         map.setLayoutProperty('node_transparent', 'visibility', 'visible');
         map.setLayoutProperty('segment_transparent', 'visibility', 'visible');
+        map.setLayoutProperty('511zero', 'visibility', 'none');
+        map.setLayoutProperty('511NotZero', 'visibility', 'none');
         document.getElementById('map__legend-crash').style.display='flex';
         document.getElementById('map__legend-511').style.display='none';
     }

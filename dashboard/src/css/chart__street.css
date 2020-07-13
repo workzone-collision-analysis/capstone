@@ -4,6 +4,7 @@
     padding:0;
     display:flex;
     cursor:default;
+    overflow-y:scroll;
 }
 
 .chart__section{
@@ -11,8 +12,12 @@
     border-bottom: 1px solid #CCCCCC;
 }
 
+.chart__section:last-child{
+    border-bottom: 0;
+}
+
 .chart__section-title{
-    padding:20px;
+    padding:15px 20px;
     display:flex;
     justify-content: space-between;
     color:#2962FF;
@@ -24,16 +29,30 @@
     display:flex;
 }
 
+.chart__section-main{
+    display:flex;
+}
+
 .street-info__main-column{
     padding: 0 20px 5px 20px;
-    width:45%;
+    width:47%;
 }
 
 .chart__section-main p{
-    margin-bottom: 15px;
+    margin-bottom: 10px;
+    font-size: 15px;
 }
 
 .chart__section-main canvas{
-    padding: 10px 10px;
-    height:200px;
+    padding: 5px 10px 0 10px;
+    height:150px;
 }
+
+#chart_hour{
+    height:140px;
+}
+
+#chart_injured{
+    height:140px;
+}
+

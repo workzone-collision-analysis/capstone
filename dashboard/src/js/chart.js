@@ -52,13 +52,25 @@ function monthlyCrashChart(target){
                 fill: false,
                 responsive: true,
                 maintainAspectRatio: false,
+                tooltips: {
+                    callbacks: {
+                        title: function(tooltipItems, data) {
+                            return data.labels[tooltipItems[0].index].toLocaleString('default', { month: 'short', year:'numeric' });
+                        }
+                    }
+                    },
                 scales: {
                     xAxes: [{
                         type: "time",
+                        time: {
+                            unit: 'month',
+                            displayFormats: {
+                                'day': 'MMM DD'
+                            }},
                         display: true,
                         scaleLabel: {
-                            display: true,
-                            labelString: "Date",
+                            display: false,
+                            labelString: "Month",
                         }
                     }],
                     yAxes: [{
@@ -111,12 +123,6 @@ function hourlyCrashChart(target){
                 responsive: true,
                 maintainAspectRatio: false,
                 scales: {
-                    xAxes: [{
-                       scaleLabel: {
-                            display: true,
-                            labelString: "Hour",
-                        }
-                    }],
                     yAxes: [{
                         ticks: {
                             beginAtZero: true,

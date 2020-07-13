@@ -142,18 +142,15 @@ map.on('load', function () {
         update_attribute(target);
         monthlyCrashChart(monthlyCrash);
         const hourlyCrash = store['hourlyCrash'].filter(d=>d.id === clicked_feature.id);
-        console.log('warning');
         hourlyCrashChart(hourlyCrash);
     });
 
     map.on('touchstart', 'shortSegment', function (e) {
         let clicked_feature = e.features[0];
-        console.log(clicked_feature.id);
     });
 
     map.on('touchstart', 'shortSegmentCentroid', function (e) {
         let clicked_feature = e.features[0];
-        console.log(clicked_feature.id);
     });
 
 });
@@ -171,7 +168,6 @@ function changeMap(source){
         document.getElementById('map__legend-crash').style.display='none';
         document.getElementById('map__legend-511').style.display='flex';
         if(map.getLayer('511')=== undefined){
-            console.log('BAAAM');
         }
     }
     else{

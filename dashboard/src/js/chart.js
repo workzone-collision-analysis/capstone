@@ -37,7 +37,6 @@ function monthlyCrashChart(target){
     }
     else{
         const canvas = document.getElementById('chart_month').getContext('2d');
-        canvas.height = 200;
         const data = {
             // Labels should be Date objects
             labels: store['monthArray'],
@@ -105,7 +104,6 @@ function hourlyCrashChart(target){
     }
     else{
         const canvas = document.getElementById('chart_hour').getContext('2d');
-        canvas.height = 200;
         const data = {
             // Labels should be Date objects
             labels: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23],

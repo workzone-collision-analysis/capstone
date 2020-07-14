@@ -31,6 +31,9 @@
 
 .chart__section-main{
     display:flex;
+    justify-content: center;
+    align-items: center;
+    position:relative;
 }
 
 .street-info__main-column{
@@ -45,14 +48,11 @@
 
 .chart__section-main canvas{
     padding: 5px 10px 0 10px;
-    height:140px;
 }
 
-#chart_hour{
-    height:130px;
-}
-
-#chart_injured{
-    height:130px;
+.chart__section-main h4{
+    position: absolute;
+    z-index: 2;
+    color:#636363;
 }
 

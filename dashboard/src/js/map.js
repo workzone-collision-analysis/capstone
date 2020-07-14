@@ -115,6 +115,9 @@ map.on('load', function () {
 
     // these are related to click activities on each layers
     map.on('click', 'segment_transparent', function (e) {
+        Array.from(document.getElementsByClassName('chart__message')).forEach(function(element){
+            element.style.display = 'none';
+        });
         let clicked_feature = e.features[0];
         const target = store['segment_attribute'].filter(d=>d.id === clicked_feature.id)[0];
         const lngArray = clicked_feature.geometry.coordinates.map(d=>d[0]);
@@ -141,6 +144,9 @@ map.on('load', function () {
     });
 
     map.on('click', 'node', function (e) {
+        Array.from(document.getElementsByClassName('chart__message')).forEach(function(element){
+            element.style.display = 'none';
+        });
         const clicked_feature = e.features[0];
 
         const monthlyCrash = JSON.parse(store['monthlyCrashNode'].filter(d=>d.id === clicked_feature.id)[0]['count']);
@@ -161,6 +167,9 @@ map.on('load', function () {
     });
 
     map.on('click', 'shortSegmentCentroid', function (e) {
+        Array.from(document.getElementsByClassName('chart__message')).forEach(function(element){
+            element.style.display = 'none';
+        });
         let clicked_feature = e.features[0];
         const target = store['segment_attribute'].filter(d=>d.id === clicked_feature.id)[0];
         const monthlyCrash = JSON.parse(store['monthlyCrashShort'].filter(d=>d.id === clicked_feature.id)[0]['count']);
@@ -195,6 +204,9 @@ map.on('load', function () {
 
 // this function is for the dropbox menu
 function changeMap(source){
+    Array.from(document.getElementsByClassName('chart__message')).forEach(function(element){
+        element.style.display = 'block';
+    });
     if(source.value==='511'){
         map.setLayoutProperty('segment', 'visibility', 'none');
         map.setLayoutProperty('node', 'visibility', 'none');

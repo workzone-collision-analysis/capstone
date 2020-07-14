@@ -59,3 +59,43 @@
 #map__legend-511{
     display:none;
 }
+
+.map__popup{
+    padding: 5px 5px 0px 5px;
+}
+
+.map__popup h4{
+    font-size:13px;
+    font-weight:700;
+    margin-bottom:5px;
+}
+
+.map__popup p{
+    font-size:12px;
+}
+
+.mapboxgl-popup-content{
+    background-color: #525252;
+    color:#FFFFFF;
+}
+
+.mapboxgl-popup-close-button{
+    color:#FFFFFF;
+}
+
+.mapboxgl-popup-anchor-top .mapboxgl-popup-tip,
+.mapboxgl-popup-anchor-top-left .mapboxgl-popup-tip,
+.mapboxgl-popup-anchor-top-right .mapboxgl-popup-tip {
+    border-bottom-color: #525252;
+}
+.mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip,
+.mapboxgl-popup-anchor-bottom-left .mapboxgl-popup-tip,
+.mapboxgl-popup-anchor-bottom-right .mapboxgl-popup-tip {
+    border-top-color:  #525252;
+}
+.mapboxgl-popup-anchor-left .mapboxgl-popup-tip {
+    border-right-color: #525252;
+}
+.mapboxgl-popup-anchor-right .mapboxgl-popup-tip {
+    border-left-color: #525252;
+}

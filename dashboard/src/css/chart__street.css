@@ -1,6 +1,5 @@
 #chart__street{
     box-sizing: border-box;
-    border-left:1px solid #CCCCCC;
     padding:0;
     display:flex;
     cursor:default;
@@ -9,6 +8,7 @@
 .chart__section{
     color:#212121;
     border-bottom: 1px solid #CCCCCC;
+    background-color: #FFFFFF;
 }
 
 .chart__section:last-child{
@@ -16,7 +16,7 @@
 }
 
 .chart__section-title{
-    padding:15px 20px;
+    padding:15px 15px;
     display:flex;
     justify-content: space-between;
     color:#212121;
@@ -26,6 +26,7 @@
 
 .chart__section-main{
     display:flex;
+    flex-direction:column;
 }
 
 .chart__section-main{

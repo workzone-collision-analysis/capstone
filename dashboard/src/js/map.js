@@ -20,6 +20,16 @@ const crashNotZero511 = 'src/data/511_not_zero.geojson';
 const colorArray = ['#81C784', '#FCBBA1', '#FC9272', '#FB6A4A', '#DE2D26', '#A50F15'];
 const breakPointArray = ['0','1~10','11~20','21~30','31~40','40~'];
 
+const crashPopupTemplate =
+    '<div class="map__popup">\n' +
+        '<h4>Street / Node Characteristic</h4>\n'+
+        '<p>Number of Crashes: <span id="street-info__Crash"></span></p>\n' +
+        '<p>Roadway Type: <span id="street-info__Roadway"></span></p>\n' +
+        '<p>Posted Speed: <span id="street-info__Speed"></span></p>\n' +
+        '<p>Street Width: <span id="street-info__Width"></span></p>\n' +
+        '<p>Number of Lanes: <span id="street-info__Total"></span></p>\n' +
+    '</div>';
+
 map.on('load', function () {
     window.setInterval(function () {
         map.getSource('shortSegment').setData(shortSegmentURL);
@@ -88,27 +98,6 @@ map.on('load', function () {
     });
 
     map.addLayer({
-        'id': 'shortSegmentCentroid_transparent',
-        'source': 'shortSegmentCentroid',
-        'type': 'circle',
-        'paint': {
-            'circle-color': 'rgba(0,0,0,0)',
-            'circle-radius': 8
-        }
-    });
-
-    map.addLayer({
-        'id': 'node_transparent',
-        'source': 'node',
-        'type': 'circle',
-        'paint': {
-            'circle-color': 'rgba(0,0,0,0)',
-            'circle-radius': 8
-        }
-    });
-
-
-    map.addLayer({
         'id': 'node',
         'source': 'node',
         'type': 'circle',
@@ -128,25 +117,70 @@ map.on('load', function () {
     map.on('click', 'segment_transparent', function (e) {
         let clicked_feature = e.features[0];
         const target = store['segment_attribute'].filter(d=>d.id === clicked_feature.id)[0];
-        update_attribute(target);
-    });
+        const lngArray = clicked_feature.geometry.coordinates.map(d=>d[0]);
+        const latArray = clicked_feature.geometry.coordinates.map(d=>d[1]);
+        const lngAverage = lngArray.reduce((a, b) => a + b) / lngArray.length;
+        const latAverage = latArray.reduce((a, b) => a + b) / latArray.length;
+        const description = 'test';
+        //document.getElementById('street-info__Crash').innerText = clicked_feature.properties.count;
+        //update_attribute(target);
+        const monthlyCrash = JSON.parse(store['monthlyCrashSegment'].filter(d=>d.id === clicked_feature.id)[0]['count']);
+        monthlyCrashChart(monthlyCrash);
+        const hourlyCrash =  JSON.parse(store['hourlyCrashSegment'].filter(d=>d.id === clicked_feature.id)[0]['count']);
+        hourlyCrashChart(hourlyCrash);
+        if(store['popup']!==undefined){
+            store['popup'].remove();
+        }
+        store['popup'] = new mapboxgl.Popup()
+                            .setLngLat([lngAverage,latAverage])
+                            .setHTML(crashPopupTemplate)
+                            .addTo(map);
 
-    map.on('click', 'node_transparent', function (e) {
-        let clicked_feature = e.features[0];
-        console.log(clicked_feature.id);
-    });
-
-    map.on('click', 'shortSegmentCentroid_transparent', function (e) {
-        let clicked_feature = e.features[0];
-        const target = store['segment_attribute'].filter(d=>d.id === clicked_feature.id)[0];
-        const monthlyCrash = store['monthlyCrash'].filter(d=>d.id === clicked_feature.id);
         document.getElementById('street-info__Crash').innerText = clicked_feature.properties.count;
         update_attribute(target);
+    });
+
+    map.on('click', 'node', function (e) {
+        const clicked_feature = e.features[0];
+
+        const monthlyCrash = JSON.parse(store['monthlyCrashNode'].filter(d=>d.id === clicked_feature.id)[0]['count']);
         monthlyCrashChart(monthlyCrash);
-        const hourlyCrash = store['hourlyCrash'].filter(d=>d.id === clicked_feature.id);
+        const hourlyCrash =  JSON.parse(store['hourlyCrashNode'].filter(d=>d.id === clicked_feature.id)[0]['count']);
+        hourlyCrashChart(hourlyCrash);
+
+        if(store['popup']!==undefined){
+            store['popup'].remove();
+        }
+
+        store['popup'] = new mapboxgl.Popup()
+            .setLngLat(clicked_feature.geometry.coordinates)
+            .setHTML(crashPopupTemplate)
+            .addTo(map);
+
+
+    });
+
+    map.on('click', 'shortSegmentCentroid', function (e) {
+        let clicked_feature = e.features[0];
+        const target = store['segment_attribute'].filter(d=>d.id === clicked_feature.id)[0];
+        const monthlyCrash = JSON.parse(store['monthlyCrashShort'].filter(d=>d.id === clicked_feature.id)[0]['count']);
+        monthlyCrashChart(monthlyCrash);
+        const hourlyCrash =  JSON.parse(store['hourlyCrashShort'].filter(d=>d.id === clicked_feature.id)[0]['count']);
         hourlyCrashChart(hourlyCrash);
         const hourlyInjured = store['hourlyInjured'].filter(d=>d.id === clicked_feature.id);
         hourlyInjuredChart(hourlyInjured);
+
+        if(store['popup']!==undefined){
+            store['popup'].remove();
+        }
+
+        store['popup'] = new mapboxgl.Popup()
+            .setLngLat(clicked_feature.geometry.coordinates)
+            .setHTML(crashPopupTemplate)
+            .addTo(map);
+
+        document.getElementById('street-info__Crash').innerText = clicked_feature.properties.count;
+        update_attribute(target);
     });
 
     map.on('touchstart', 'shortSegment', function (e) {

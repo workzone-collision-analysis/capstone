@@ -162,6 +162,7 @@ map.on('load', function () {
             element.style.display = 'none';
         });
         const clicked_feature = e.features[0];
+        const target = store['node_attribute'].filter(d=>d.node_id === clicked_feature.id)[0];
         const monthlyCrash = JSON.parse(store['monthlyCrashNode'].filter(d=>d.id === clicked_feature.id)[0]['count']);
         monthlyCrashChart(monthlyCrash);
         const hourlyCrash =  JSON.parse(store['hourlyCrashNode'].filter(d=>d.id === clicked_feature.id)[0]['count']);
@@ -175,8 +176,8 @@ map.on('load', function () {
             .setLngLat(clicked_feature.geometry.coordinates)
             .setHTML(popupTemplateCrash)
             .addTo(map);
-
-
+        document.getElementById('street-info__Crash').innerText = clicked_feature.properties.count;
+        update_attribute(target);
     });
 
     map.on('click', 'shortSegmentCentroid', function (e) {

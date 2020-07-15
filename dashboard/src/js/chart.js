@@ -2,6 +2,7 @@ const store = {};
 
 Promise.all([
     d3.csv('src/data/shared_street_with_attribute.csv'),
+    d3.csv('src/data/shared_node_with_attribute.csv'),
     d3.csv('src/data/month_array.csv'),
     d3.csv('src/data/crash_short_segment_monthly.csv'),
     d3.csv('src/data/crash_node_monthly.csv'),
@@ -11,9 +12,10 @@ Promise.all([
     d3.csv('src/data/crash_segment_hourly.csv'),
     d3.csv('src/data/crash_short_segment_hourly_injured.csv'),
     d3.csv('src/data/511_with_null.csv')
-]).then(([segment, monthlyArray, monthlyCrashShort, monthlyCrashNode, monthlyCrashSegment,
+]).then(([segment, node, monthlyArray, monthlyCrashShort, monthlyCrashNode, monthlyCrashSegment,
           hourlyCrashShort, hourlyCrashNode, hourlyCrashSegment, hourlyInjuredShort, event511]) => {
     store['segment_attribute'] = segment;
+    store['node_attribute'] = node;
     store['511_attribute'] = event511;
     console.log(event511);
     store['monthArray'] = monthlyArray.map(d=>d3.timeParse('%Y-%m-%d')(d['0']));

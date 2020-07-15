@@ -11,13 +11,14 @@ Promise.all([
     d3.csv('src/data/crash_node_hourly.csv'),
     d3.csv('src/data/crash_segment_hourly.csv'),
     d3.csv('src/data/crash_short_segment_hourly_injured.csv'),
+    d3.csv('src/data/crash_node_hourly_injured.csv'),
+    d3.csv('src/data/crash_segment_hourly_injured.csv'),
     d3.csv('src/data/511_with_null.csv')
 ]).then(([segment, node, monthlyArray, monthlyCrashShort, monthlyCrashNode, monthlyCrashSegment,
-          hourlyCrashShort, hourlyCrashNode, hourlyCrashSegment, hourlyInjuredShort, event511]) => {
+          hourlyCrashShort, hourlyCrashNode, hourlyCrashSegment, hourlyInjuredShort, hourlyInjuredNode, hourlyInjuredSegment, event511]) => {
     store['segment_attribute'] = segment;
     store['node_attribute'] = node;
     store['511_attribute'] = event511;
-    console.log(event511);
     store['monthArray'] = monthlyArray.map(d=>d3.timeParse('%Y-%m-%d')(d['0']));
     store['monthlyCrashShort'] = monthlyCrashShort;
     store['monthlyCrashNode'] = monthlyCrashNode;
@@ -25,7 +26,9 @@ Promise.all([
     store['hourlyCrashShort'] = hourlyCrashShort;
     store['hourlyCrashNode'] = hourlyCrashNode;
     store['hourlyCrashSegment'] = hourlyCrashSegment;
-    store['hourlyInjured'] = hourlyInjuredShort;
+    store['hourlyInjuredShort'] = hourlyInjuredShort;
+    store['hourlyInjuredNode'] = hourlyInjuredNode;
+    store['hourlyInjuredSegment'] = hourlyInjuredSegment;
 });
 
 function update_attribute(target){
@@ -171,19 +174,19 @@ function hourlyCrashChart(target){
 
 function hourlyInjuredChart(target){
     if(store['hourlyInjuredChart']!==undefined){
-        store['hourlyInjuredChart'].data.datasets[0].data = target.map(d=>+d['number_of_injured']);
-        store['hourlyInjuredChart'].data.datasets[1].data = target.map(d=>+d['number_of_killed']);
+        store['hourlyInjuredChart'].data.datasets[0].data = JSON.parse(target['number_of_injured']);
+        store['hourlyInjuredChart'].data.datasets[1].data = JSON.parse(target['number_of_killed']);
         store['hourlyInjuredChart'].update();
     }
     else{
         const canvas = document.getElementById('chart_injured').getContext('2d');
         const data = {
             // Labels should be Date objects
-            labels: target.map(d=>d.hour),
+            labels: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23],
             datasets: [{
                 fill: false,
                 label: "# of injured",
-                data: target.map(d=>+d['number_of_injured']),
+                data: JSON.parse(target['number_of_injured']),
                 borderColor: '#969696',
                 backgroundColor: '#969696',
                 lineTension: 0,
@@ -191,7 +194,7 @@ function hourlyInjuredChart(target){
             {
                 fill: false,
                 label: "# of killed",
-                data: target.map(d=>+d['number_of_killed']),
+                data: JSON.parse(target['number_of_killed']),
                 borderColor: '#2979FF',
                 backgroundColor: '#2979FF',
                 lineTension: 0,

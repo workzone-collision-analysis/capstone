@@ -145,6 +145,8 @@ map.on('load', function () {
         monthlyCrashChart(monthlyCrash);
         const hourlyCrash =  JSON.parse(store['hourlyCrashSegment'].filter(d=>d.id === clicked_feature.id)[0]['count']);
         hourlyCrashChart(hourlyCrash);
+        const hourlyInjured = store['hourlyInjuredSegment'].filter(d=>d.id === clicked_feature.id)[0];
+        hourlyInjuredChart(hourlyInjured);
         if(store['popup']!==undefined){
             store['popup'].remove();
         }
@@ -167,6 +169,8 @@ map.on('load', function () {
         monthlyCrashChart(monthlyCrash);
         const hourlyCrash =  JSON.parse(store['hourlyCrashNode'].filter(d=>d.id === clicked_feature.id)[0]['count']);
         hourlyCrashChart(hourlyCrash);
+        const hourlyInjured = store['hourlyInjuredNode'].filter(d=>d.id === clicked_feature.id)[0];
+        hourlyInjuredChart(hourlyInjured);
 
         if(store['popup']!==undefined){
             store['popup'].remove();
@@ -190,7 +194,7 @@ map.on('load', function () {
         monthlyCrashChart(monthlyCrash);
         const hourlyCrash =  JSON.parse(store['hourlyCrashShort'].filter(d=>d.id === clicked_feature.id)[0]['count']);
         hourlyCrashChart(hourlyCrash);
-        const hourlyInjured = store['hourlyInjured'].filter(d=>d.id === clicked_feature.id);
+        const hourlyInjured = store['hourlyInjuredShort'].filter(d=>d.id === clicked_feature.id)[0];
         hourlyInjuredChart(hourlyInjured);
 
         if(store['popup']!==undefined){

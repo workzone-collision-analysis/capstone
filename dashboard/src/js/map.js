@@ -33,15 +33,15 @@ const popupTemplateCrash =
 const popupTemplate511 =
     '<div class="map__popup">\n' +
         '<h4>511 Event Characteristic</h4>\n'+
-        '<p>Number of Crashes (within 900ft): <span id="street-info__Crash"></span></p>\n' +
-        '<p>Created Time: <span id="street-info__CreateTime"></span></p>\n' +
-        '<p>Closed Time: <span id="street-info__CloseTime"></span></p>\n' +
-        '<p>Duration (hour): <span id="street-info__CloseTime"></span></p>\n' +
-        '<p>Peak-time duration: <span id="street-info__CloseTime"></span></p>\n' +
-        '<p>Roadway Type: <span id="street-info__Roadway"></span></p>\n' +
-        '<p>Posted Speed: <span id="street-info__Speed"></span></p>\n' +
-        '<p>Street Width: <span id="street-info__Width"></span></p>\n' +
-        '<p>Number of Lanes: <span id="street-info__Total"></span></p>\n' +
+        '<p>Number of Crashes (within 900ft): <span id="511-info__Crash"></span></p>\n' +
+        '<p>Created Time: <span id="511-info__CreateTime"></span></p>\n' +
+        '<p>Closed Time: <span id="511-info__CloseTime"></span></p>\n' +
+        '<p>Duration (hour): <span id="511-info__Duration"></span></p>\n' +
+        '<p>Peak-time duration: <span id="511-info__PeakDuration"></span></p>\n' +
+        '<p>Roadway Type: <span id="511-info__Roadway"></span></p>\n' +
+        '<p>Posted Speed: <span id="511-info__Speed"></span></p>\n' +
+        '<p>Street Width: <span id="511-info__Width"></span></p>\n' +
+        '<p>Number of Lanes: <span id="511-info__Total"></span></p>\n' +
     '</div>';
 
 map.on('load', function () {
@@ -162,7 +162,6 @@ map.on('load', function () {
             element.style.display = 'none';
         });
         const clicked_feature = e.features[0];
-
         const monthlyCrash = JSON.parse(store['monthlyCrashNode'].filter(d=>d.id === clicked_feature.id)[0]['count']);
         monthlyCrashChart(monthlyCrash);
         const hourlyCrash =  JSON.parse(store['hourlyCrashNode'].filter(d=>d.id === clicked_feature.id)[0]['count']);
@@ -211,6 +210,7 @@ map.on('load', function () {
             element.style.display = 'none';
         });
         const clicked_feature = e.features[0];
+        const target = store['511_attribute'].filter(d=>+d.event_id === clicked_feature.id)[0];
 
         if(store['popup']!==undefined){
             store['popup'].remove();
@@ -220,6 +220,8 @@ map.on('load', function () {
             .setLngLat(clicked_feature.geometry.coordinates)
             .setHTML(popupTemplate511)
             .addTo(map);
+
+        update_attribute_511(target);
     });
 
     map.on('click', '511NotZero', function (e) {
@@ -227,6 +229,7 @@ map.on('load', function () {
             element.style.display = 'none';
         });
         const clicked_feature = e.features[0];
+        const target = store['511_attribute'].filter(d=>+d.event_id === clicked_feature.id)[0];
 
         if(store['popup']!==undefined){
             store['popup'].remove();
@@ -236,6 +239,8 @@ map.on('load', function () {
             .setLngLat(clicked_feature.geometry.coordinates)
             .setHTML(popupTemplate511)
             .addTo(map);
+
+        update_attribute_511(target);
     });
 
 });

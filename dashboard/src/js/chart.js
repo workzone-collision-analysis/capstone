@@ -10,9 +10,12 @@ Promise.all([
     d3.csv('src/data/crash_node_hourly.csv'),
     d3.csv('src/data/crash_segment_hourly.csv'),
     d3.csv('src/data/crash_short_segment_hourly_injured.csv'),
+    d3.csv('src/data/511_with_null.csv')
 ]).then(([segment, monthlyArray, monthlyCrashShort, monthlyCrashNode, monthlyCrashSegment,
-          hourlyCrashShort, hourlyCrashNode, hourlyCrashSegment, hourlyInjuredShort]) => {
+          hourlyCrashShort, hourlyCrashNode, hourlyCrashSegment, hourlyInjuredShort, event511]) => {
     store['segment_attribute'] = segment;
+    store['511_attribute'] = event511;
+    console.log(event511);
     store['monthArray'] = monthlyArray.map(d=>d3.timeParse('%Y-%m-%d')(d['0']));
     store['monthlyCrashShort'] = monthlyCrashShort;
     store['monthlyCrashNode'] = monthlyCrashNode;
@@ -28,6 +31,19 @@ function update_attribute(target){
     document.getElementById('street-info__Speed').innerText = (target['posted_speed']!=='-1')?target['posted_speed']:'-';
     document.getElementById('street-info__Width').innerText = (target['street_width']!=='-1.0')?target['street_width']:'-';
     document.getElementById('street-info__Total').innerText = (target['number_total']!=='-1')?target['number_total']:'-';
+}
+
+function update_attribute_511(target){
+    document.getElementById('511-info__Crash').innerText = (target['crash_count_900ft']!=='-1')?target['crash_count_900ft']:'-';
+    document.getElementById('511-info__CreateTime').innerText = (target['create_time']!=='-1')?target['create_time']:'-';
+    document.getElementById('511-info__CloseTime').innerText = (target['close_time']!=='-1.0')?target['close_time']:'-';
+    document.getElementById('511-info__Duration').innerText = (target['duration']!=='-1')?target['duration']:'-';
+    document.getElementById('511-info__PeakDuration').innerText = (target['peak_duration']!=='-1')?target['peak_duration']:'-';
+    console.log(target['roadway_type']);
+    document.getElementById('511-info__Roadway').innerText = (target['roadway_type']!=='-1.0')?target['roadway_type']:'-';
+    document.getElementById('511-info__Speed').innerText = (target['posted_speed']!=='-1')?target['posted_speed']:'-';
+    document.getElementById('511-info__Width').innerText = (target['street_width']!=='-1')?target['street_width']:'-';
+    document.getElementById('511-info__Total').innerText = (target['number_total_lane']!=='-1')?target['number_total_lane']:'-';
 }
 
 function monthlyCrashChart(target){

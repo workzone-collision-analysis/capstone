@@ -42,8 +42,8 @@ function update_attribute_511(target){
     document.getElementById('511-info__Crash').innerText = (target['crash_count_900ft']!=='-1')?target['crash_count_900ft']:'-';
     document.getElementById('511-info__CreateTime').innerText = (target['create_time']!=='-1')?target['create_time']:'-';
     document.getElementById('511-info__CloseTime').innerText = (target['close_time']!=='-1.0')?target['close_time']:'-';
-    document.getElementById('511-info__Duration').innerText = (target['duration']!=='-1')?target['duration']:'-';
-    document.getElementById('511-info__PeakDuration').innerText = (target['peak_duration']!=='-1')?target['peak_duration']:'-';
+    document.getElementById('511-info__Duration').innerText = (target['duration']!=='-1')?Math.round(target['duration']*100)/100:'-';
+    document.getElementById('511-info__PeakDuration').innerText = (target['peak_duration']!=='-1')?Math.round(target['peak_duration']*100)/100:'-';
     console.log(target['roadway_type']);
     document.getElementById('511-info__Roadway').innerText = (target['roadway_type']!=='-1.0')?target['roadway_type']:'-';
     document.getElementById('511-info__Speed').innerText = (target['posted_speed']!=='-1')?target['posted_speed']:'-';

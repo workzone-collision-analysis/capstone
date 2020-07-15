@@ -233,9 +233,14 @@ map.on('load', function () {
         Array.from(document.getElementsByClassName('chart__message')).forEach(function(element){
             element.style.display = 'none';
         });
-        const clicked_feature = e.features[0];
-        const target = store['511_attribute'].filter(d=>+d.event_id === clicked_feature.id)[0];
+        let clicked_feature;
+        if(e.features.length>1){
+            clicked_feature = Array.from(e.features).sort((a,b)=>d3.descending(a.properties['crash_count_900ft'], b.properties['crash_count_900ft']))[0];
+        } else{
+            clicked_feature = e.features[0];
+        }
 
+        const target = store['511_attribute'].filter(d=>+d.event_id === clicked_feature.id)[0];
         if(store['popup']!==undefined){
             store['popup'].remove();
         }
@@ -278,9 +283,9 @@ function changeMap(source){
                 'type': 'circle',
                 'paint': {
                     "circle-opacity": 0,
-                    "circle-stroke-width": 2,
+                    "circle-stroke-width": 1,
                     "circle-stroke-color": '#F44336',
-                    'circle-radius': 2
+                    'circle-radius': 3
                 }
             });
 
@@ -290,12 +295,9 @@ function changeMap(source){
                 'source': '511NotZero',
                 'type': 'circle',
                 'paint': {
+                    "circle-opacity": 0.6,
                     "circle-color": '#F44336',
-                    "circle-stroke-width": 2,
-                    "circle-stroke-color": '#F44336',
-                    'circle-radius': ['case',
-                        ['<', ['get', 'crash_count_900ft'], 2], 2,
-                        ['<', ['get', 'count'], 4], 4, 8]
+                    'circle-radius': ['+',1,['*',4,['^', ['get', 'crash_count_900ft'], 0.5]]]
                 }
             });
         }

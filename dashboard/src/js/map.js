@@ -217,6 +217,9 @@ map.on('load', function () {
         const clicked_feature = e.features[0];
         const target = store['511_attribute'].filter(d=>+d.event_id === clicked_feature.id)[0];
 
+        const hourlyCrash =  JSON.parse(store['hourlyCrash511'].filter(d=>+d.event_id === clicked_feature.id)[0]['crash_by_hour']);
+        hourly511Chart(hourlyCrash);
+
         if(store['popup']!==undefined){
             store['popup'].remove();
         }
@@ -241,6 +244,9 @@ map.on('load', function () {
         }
 
         const target = store['511_attribute'].filter(d=>+d.event_id === clicked_feature.id)[0];
+        const hourlyCrash =  JSON.parse(store['hourlyCrash511'].filter(d=>+d.event_id === clicked_feature.id)[0]['crash_by_hour']);
+        hourly511Chart(hourlyCrash);
+
         if(store['popup']!==undefined){
             store['popup'].remove();
         }
@@ -300,6 +306,8 @@ function changeMap(source){
                     'circle-radius': ['+',1,['*',4,['^', ['get', 'crash_count_900ft'], 0.5]]]
                 }
             });
+
+            clusteringBarChart();
         }
        else{
             map.setLayoutProperty('511zero', 'visibility', 'visible');

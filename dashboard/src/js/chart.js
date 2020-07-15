@@ -13,9 +13,11 @@ Promise.all([
     d3.csv('src/data/crash_short_segment_hourly_injured.csv'),
     d3.csv('src/data/crash_node_hourly_injured.csv'),
     d3.csv('src/data/crash_segment_hourly_injured.csv'),
-    d3.csv('src/data/511_with_null.csv')
+    d3.csv('src/data/511_with_null.csv'),
+    d3.csv('src/data/511_hourly_crash.csv')
 ]).then(([segment, node, monthlyArray, monthlyCrashShort, monthlyCrashNode, monthlyCrashSegment,
-          hourlyCrashShort, hourlyCrashNode, hourlyCrashSegment, hourlyInjuredShort, hourlyInjuredNode, hourlyInjuredSegment, event511]) => {
+          hourlyCrashShort, hourlyCrashNode, hourlyCrashSegment, hourlyInjuredShort, hourlyInjuredNode, hourlyInjuredSegment,
+          event511, hourlyCrash511]) => {
     store['segment_attribute'] = segment;
     store['node_attribute'] = node;
     store['511_attribute'] = event511;
@@ -29,6 +31,7 @@ Promise.all([
     store['hourlyInjuredShort'] = hourlyInjuredShort;
     store['hourlyInjuredNode'] = hourlyInjuredNode;
     store['hourlyInjuredSegment'] = hourlyInjuredSegment;
+    store['hourlyCrash511'] = hourlyCrash511;
 });
 
 function update_attribute(target){
@@ -229,4 +232,106 @@ function hourlyInjuredChart(target){
         };
         store['hourlyInjuredChart'] = new Chart(canvas, options);
     }
+}
+
+function hourly511Chart(target){
+    if(store['hourly511Chart']!==undefined){
+        store['hourly511Chart'].data.datasets[0].data = target;
+        store['hourly511Chart'].update();
+    }
+    else{
+        const canvas = document.getElementById('511_hour').getContext('2d');
+        const data = {
+            // Labels should be Date objects
+            labels: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23],
+            datasets: [{
+                fill: false,
+                label: "# of Crashes",
+                data: target,
+                borderColor: '#969696',
+                backgroundColor: '#969696',
+                hoverBackgroundColor:  '#2979FF',
+                hoverBorderColor:  '#2979FF',
+                lineTension: 0,
+            }]
+        };
+
+        const options = {
+            type: 'bar',
+            data: data,
+            options: {
+                legend: {
+                    display: false
+                },
+                fill: false,
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    xAxes:[{
+                        maxRotation: 0
+                    }],
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true,
+                        },
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: "# of Crashes",
+                        }
+                    }]
+                }
+            }
+        };
+
+        store['hourly511Chart'] = new Chart(canvas, options);
+    }
+}
+
+function clusteringBarChart(){
+        const canvas = document.getElementById('511_clusters').getContext('2d');
+        const data = {
+            // Labels should be Date objects
+            labels: ['Type 1', 'Type 2', 'Type 3', 'Type 4', 'Type 5', 'Type 6'],
+            datasets: [{
+                fill: false,
+                label: "Probability or vehicle collision",
+                data: [50,40,30,20,40,30],
+                borderColor: ["#F44336", "#2196F3","#4CAF50","#FFC107","#673AB7", "#795548"],
+                backgroundColor: ["#F44336", "#2196F3","#4CAF50","#FFC107","#673AB7", "#795548"],
+                lineTension: 0,
+            }]
+        };
+
+        const options = {
+            type: 'bar',
+            data: data,
+            options: {
+                legend: {
+                    display: false
+                },
+                fill: false,
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    xAxes:[{
+                        maxRotation: 0
+                    }],
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true,
+                            max:100
+                        },
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: "Probability (%)",
+                        }
+                    }]
+                }
+            }
+        };
+
+        new Chart(canvas, options);
+
 }

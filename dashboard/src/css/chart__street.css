@@ -5,6 +5,13 @@
     cursor:default;
 }
 
+#chart__511{
+    box-sizing: border-box;
+    padding:0;
+    display:none;
+    cursor:default;
+}
+
 .chart__section{
     color:#212121;
     border-bottom: 1px solid #CCCCCC;

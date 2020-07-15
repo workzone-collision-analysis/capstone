@@ -2,7 +2,7 @@
     #map{
         height:100%;
     }
-    #chart__street, #chart__entire{
+    #chart__street, #chart__511{
         height:100%;
         flex-direction: column;
     }
@@ -19,6 +19,11 @@
     }
 
     #chart__street{
+        padding:10px;
+        background-color: #EFF0F0;
+    }
+
+    #chart__511{
         padding:10px;
         background-color: #EFF0F0;
     }

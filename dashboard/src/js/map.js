@@ -20,10 +20,24 @@ const crashNotZero511 = 'src/data/511_not_zero.geojson';
 const colorArray = ['#81C784', '#FCBBA1', '#FC9272', '#FB6A4A', '#DE2D26', '#A50F15'];
 const breakPointArray = ['0','1~10','11~20','21~30','31~40','40~'];
 
-const crashPopupTemplate =
+const popupTemplateCrash =
     '<div class="map__popup">\n' +
         '<h4>Street / Node Characteristic</h4>\n'+
         '<p>Number of Crashes: <span id="street-info__Crash"></span></p>\n' +
+        '<p>Roadway Type: <span id="street-info__Roadway"></span></p>\n' +
+        '<p>Posted Speed: <span id="street-info__Speed"></span></p>\n' +
+        '<p>Street Width: <span id="street-info__Width"></span></p>\n' +
+        '<p>Number of Lanes: <span id="street-info__Total"></span></p>\n' +
+    '</div>';
+
+const popupTemplate511 =
+    '<div class="map__popup">\n' +
+        '<h4>511 Event Characteristic</h4>\n'+
+        '<p>Number of Crashes (within 900ft): <span id="street-info__Crash"></span></p>\n' +
+        '<p>Created Time: <span id="street-info__CreateTime"></span></p>\n' +
+        '<p>Closed Time: <span id="street-info__CloseTime"></span></p>\n' +
+        '<p>Duration (hour): <span id="street-info__CloseTime"></span></p>\n' +
+        '<p>Peak-time duration: <span id="street-info__CloseTime"></span></p>\n' +
         '<p>Roadway Type: <span id="street-info__Roadway"></span></p>\n' +
         '<p>Posted Speed: <span id="street-info__Speed"></span></p>\n' +
         '<p>Street Width: <span id="street-info__Width"></span></p>\n' +
@@ -136,7 +150,7 @@ map.on('load', function () {
         }
         store['popup'] = new mapboxgl.Popup()
                             .setLngLat([lngAverage,latAverage])
-                            .setHTML(crashPopupTemplate)
+                            .setHTML(popupTemplateCrash)
                             .addTo(map);
 
         document.getElementById('street-info__Crash').innerText = clicked_feature.properties.count;
@@ -160,7 +174,7 @@ map.on('load', function () {
 
         store['popup'] = new mapboxgl.Popup()
             .setLngLat(clicked_feature.geometry.coordinates)
-            .setHTML(crashPopupTemplate)
+            .setHTML(popupTemplateCrash)
             .addTo(map);
 
 
@@ -185,25 +199,52 @@ map.on('load', function () {
 
         store['popup'] = new mapboxgl.Popup()
             .setLngLat(clicked_feature.geometry.coordinates)
-            .setHTML(crashPopupTemplate)
+            .setHTML(popupTemplateCrash)
             .addTo(map);
 
         document.getElementById('street-info__Crash').innerText = clicked_feature.properties.count;
         update_attribute(target);
     });
 
-    map.on('touchstart', 'shortSegment', function (e) {
-        let clicked_feature = e.features[0];
+    map.on('click', '511zero', function (e) {
+        Array.from(document.getElementsByClassName('chart__message')).forEach(function(element){
+            element.style.display = 'none';
+        });
+        const clicked_feature = e.features[0];
+
+        if(store['popup']!==undefined){
+            store['popup'].remove();
+        }
+
+        store['popup'] = new mapboxgl.Popup()
+            .setLngLat(clicked_feature.geometry.coordinates)
+            .setHTML(popupTemplate511)
+            .addTo(map);
     });
 
-    map.on('touchstart', 'shortSegmentCentroid', function (e) {
-        let clicked_feature = e.features[0];
+    map.on('click', '511NotZero', function (e) {
+        Array.from(document.getElementsByClassName('chart__message')).forEach(function(element){
+            element.style.display = 'none';
+        });
+        const clicked_feature = e.features[0];
+
+        if(store['popup']!==undefined){
+            store['popup'].remove();
+        }
+
+        store['popup'] = new mapboxgl.Popup()
+            .setLngLat(clicked_feature.geometry.coordinates)
+            .setHTML(popupTemplate511)
+            .addTo(map);
     });
 
 });
 
 // this function is for the dropbox menu
 function changeMap(source){
+    if(store['popup']!==undefined){
+        store['popup'].remove();
+    }
     Array.from(document.getElementsByClassName('chart__message')).forEach(function(element){
         element.style.display = 'block';
     });
@@ -212,11 +253,11 @@ function changeMap(source){
         map.setLayoutProperty('node', 'visibility', 'none');
         map.setLayoutProperty('shortSegment', 'visibility', 'none');
         map.setLayoutProperty('shortSegmentCentroid', 'visibility', 'none');
-        map.setLayoutProperty('shortSegmentCentroid_transparent', 'visibility', 'none');
-        map.setLayoutProperty('node_transparent', 'visibility', 'none');
         map.setLayoutProperty('segment_transparent', 'visibility', 'none');
         document.getElementById('map__legend-crash').style.display='none';
         document.getElementById('map__legend-511').style.display='flex';
+        document.getElementById('chart__street').style.display='none';
+        document.getElementById('chart__511').style.display='flex';
         if(map.getLayer('511zero')=== undefined){
             map.addSource('511zero', {type: 'geojson', data: crashZero511, 'promoteId': 'event_id'});
             map.addSource('511NotZero', {type: 'geojson', data: crashNotZero511, 'promoteId': 'event_id'});
@@ -258,12 +299,12 @@ function changeMap(source){
         map.setLayoutProperty('node', 'visibility', 'visible');
         map.setLayoutProperty('shortSegment', 'visibility', 'visible');
         map.setLayoutProperty('shortSegmentCentroid', 'visibility', 'visible');
-        map.setLayoutProperty('shortSegmentCentroid_transparent', 'visibility', 'visible');
-        map.setLayoutProperty('node_transparent', 'visibility', 'visible');
         map.setLayoutProperty('segment_transparent', 'visibility', 'visible');
         map.setLayoutProperty('511zero', 'visibility', 'none');
         map.setLayoutProperty('511NotZero', 'visibility', 'none');
         document.getElementById('map__legend-crash').style.display='flex';
         document.getElementById('map__legend-511').style.display='none';
+        document.getElementById('chart__street').style.display='flex';
+        document.getElementById('chart__511').style.display='none';
     }
 }

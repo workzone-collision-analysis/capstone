@@ -2,7 +2,7 @@
 
 Some of these notebooks will require data sets that are not present in the data folder. 
 
-To download raw data please follow instructions in each notebook of the following notebooks:
+To download raw data please follow instructions in each of the following notebooks:
 1. lion_00_data_wrangling_&_filtration
 2. crash_00_data_wrangling
 3. wz_00_data_wrangling

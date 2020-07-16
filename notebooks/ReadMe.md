@@ -17,3 +17,5 @@ Recommended sequence of running notebooks:
 4. wz_01_EDA
 5. wz_02_counting_crashes
 6. wz_03_join_to_511
+
+**Add sequence for 511 data**

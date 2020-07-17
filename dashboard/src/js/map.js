@@ -313,6 +313,12 @@ function changeMap(source){
             map.setLayoutProperty('511zero', 'visibility', 'visible');
             map.setLayoutProperty('511NotZero', 'visibility', 'visible');
         }
+        store['monthlyChart'].destroy();
+        store['hourlyChart'].destroy();
+        store['hourlyInjuredChart'].destroy();
+        store['monthlyChart'] = undefined;
+        store['hourlyChart'] = undefined;
+        store['hourlyInjuredChart'] = undefined;
     }
     else{
         map.setLayoutProperty('segment', 'visibility', 'visible');
@@ -326,5 +332,7 @@ function changeMap(source){
         document.getElementById('map__legend-511').style.display='none';
         document.getElementById('chart__street').style.display='flex';
         document.getElementById('chart__511').style.display='none';
+        store['hourly511Chart'].destroy();
+        store['hourly511Chart'] = undefined;
     }
 }

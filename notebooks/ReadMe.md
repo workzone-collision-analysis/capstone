@@ -1,6 +1,6 @@
 ## Jupyter Notebooks
 
-Some of these notebooks will require data sets that are not present in the data folder. 
+Some of these notebooks will require data sets that are not present in the data folder due to GitHub file size upload limits. Please contact us if you are having trouble generating the data sets from the notebooks provided.
 
 To download raw data please follow instructions in each of the following notebooks:
 1. lion_00_data_wrangling_&_filtration
@@ -30,5 +30,3 @@ Recommended sequence of running notebooks:
 17. wz_01_EDA
 18. wz_02_counting_crashes
 19. wz_03_join_to_511
-
-**Add sequence for 511 EDA and Clustering**

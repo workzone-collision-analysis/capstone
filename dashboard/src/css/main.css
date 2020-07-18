@@ -13,6 +13,7 @@ html, body{
 
 .container-fluid{
     height:100%;
+    position:relative;
 }
 
 .container__main{
@@ -24,5 +25,54 @@ html, body{
     height:100%;
 }
 
+#modal{
+    display:flex;
+    width:100%;
+    height:100%;
+    justify-content: center;
+    align-items: center;
+    position:absolute;
+    top:0;
+    left:0;
+    z-index:3;
+    background-color: rgba(0,0,0,0.2);
+}
 
+#modal #modal__window{
+    display:flex;
+    background-color: #FFFFFF;
+    padding:20px;
+    flex-direction: column;
+    overflow-y:scroll;
+}
+
+#modal__window h1{
+    font-weight:700;
+    font-size:20px;
+}
+
+#modal__window button{
+    width:40px;
+    height: 30px;
+    outline:none;
+    border:none;
+    background-color:#FFFFFF;
+    border-radius:5px;
+    font-weight:400;
+    font-size:18px;
+}
+
+#window-title{
+    display:flex;
+    justify-content: space-between;
+    padding-left: 0;
+    padding-right:20px;
+    align-items: center;
+    margin: 0 0 20px 0;
+    height:20px;
+}
+
+#modal__window button:hover{
+    font-weight:700;
+}
 

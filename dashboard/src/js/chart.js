@@ -34,6 +34,14 @@ Promise.all([
     store['hourlyCrash511'] = hourlyCrash511;
 });
 
+function modal(){
+    document.getElementById('modal').style.display='flex';
+}
+
+function modal_close(){
+    document.getElementById('modal').style.display='none';
+}
+
 function update_attribute(target){
     document.getElementById('street-info__Roadway').innerText = (target['roadway_type']!=='-1')?target['roadway_type']:'-';
     document.getElementById('street-info__Speed').innerText = (target['posted_speed']!=='-1')?target['posted_speed']:'-';

@@ -300,13 +300,13 @@ function clusteringBarChart(){
         const canvas = document.getElementById('511_clusters').getContext('2d');
         const data = {
             // Labels should be Date objects
-            labels: ['Type 1', 'Type 2', 'Type 3', 'Type 4', 'Type 5', 'Type 6'],
+            labels: ['Type 1', 'Type 2', 'Type 3', 'Type 4'],
             datasets: [{
                 fill: false,
                 label: "Probability or vehicle collision",
-                data: [50,40,30,20,40,30],
-                borderColor: ["#F44336", "#2196F3","#4CAF50","#FFC107","#673AB7", "#795548"],
-                backgroundColor: ["#F44336", "#2196F3","#4CAF50","#FFC107","#673AB7", "#795548"],
+                data: [16.04,13.10,13.85,16.48],
+                borderColor: ["#F44336", "#2196F3","#4CAF50","#FFC107"],
+                backgroundColor: ["#F44336", "#2196F3","#4CAF50","#FFC107"],
                 lineTension: 0,
             }]
         };
@@ -328,7 +328,7 @@ function clusteringBarChart(){
                     yAxes: [{
                         ticks: {
                             beginAtZero: true,
-                            max:100
+                            max:20
                         },
                         display: true,
                         scaleLabel: {

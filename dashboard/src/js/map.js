@@ -14,8 +14,8 @@ const shortSegmentCentroidURL = 'src/data/short_segment.geojson';
 const shortSegmentURL = 'src/data/short_segment_line.geojson';
 const segmentURL = 'src/data/segment.geojson';
 const shstNodeURL = 'src/data/node.geojson';
-const crashZero511 = 'src/data/511_zero.geojson';
-const crashNotZero511 = 'src/data/511_not_zero.geojson';
+const crashZero511 = 'src/data/511_crash_not_occurred.geojson';
+const crashNotZero511 = 'src/data/511_crash_occurred.geojson';
 
 const colorArray = ['#81C784', '#FCBBA1', '#FC9272', '#FB6A4A', '#DE2D26', '#A50F15'];
 const breakPointArray = ['0','1~10','11~20','21~30','31~40','40~'];
@@ -290,7 +290,12 @@ function changeMap(source){
                 'paint': {
                     "circle-opacity": 0,
                     "circle-stroke-width": 1,
-                    "circle-stroke-color": '#F44336',
+                    "circle-stroke-opacity":0.6,
+                    "circle-stroke-color": ['case',
+                        ['==', ['get', 'cluster'], 0], "#F44336",
+                        ['==', ['get', 'cluster'], 1], "#2196F3",
+                        ['==', ['get', 'cluster'], 2], "#4CAF50",
+                        "#FFC107"],
                     'circle-radius': 3
                 }
             });
@@ -302,7 +307,11 @@ function changeMap(source){
                 'type': 'circle',
                 'paint': {
                     "circle-opacity": 0.6,
-                    "circle-color": '#F44336',
+                    "circle-color": ['case',
+                        ['==', ['get', 'cluster'], 0], "#F44336",
+                        ['==', ['get', 'cluster'], 1], "#2196F3",
+                        ['==', ['get', 'cluster'], 2], "#4CAF50",
+                        "#FFC107"],
                     'circle-radius': ['+',1,['*',4,['^', ['get', 'crash_count_900ft'], 0.5]]]
                 }
             });

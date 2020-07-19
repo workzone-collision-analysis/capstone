@@ -196,7 +196,7 @@ function hourlyInjuredChart(target){
             labels: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23],
             datasets: [{
                 fill: false,
-                label: "# of injured",
+                label: "injured",
                 data: JSON.parse(target['number_of_injured']),
                 borderColor: '#969696',
                 backgroundColor: '#969696',
@@ -204,7 +204,7 @@ function hourlyInjuredChart(target){
             },
             {
                 fill: false,
-                label: "# of killed",
+                label: "killed",
                 data: JSON.parse(target['number_of_killed']),
                 borderColor: '#2979FF',
                 backgroundColor: '#2979FF',

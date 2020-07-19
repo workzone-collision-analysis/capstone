@@ -62,17 +62,17 @@ html, body{
 }
 
 #window-title{
-    display:flex;
     justify-content: space-between;
     padding-left: 0;
     padding-right:20px;
     align-items: center;
-    margin: 0 0 20px 0;
-    height:50px;
+    margin: 0;
+    min-height:50px;
 }
 
 #window-title h1{
     font-size:25px;
+    margin-bottom:20px;
 }
 
 #modal__window button:hover{

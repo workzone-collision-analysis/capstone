@@ -242,7 +242,7 @@ map.on('load', function () {
         } else{
             clicked_feature = e.features[0];
         }
-
+        console.log(clicked_feature.id);
         const target = store['511_attribute'].filter(d=>+d.event_id === clicked_feature.id)[0];
         const hourlyCrash =  JSON.parse(store['hourlyCrash511'].filter(d=>+d.event_id === clicked_feature.id)[0]['crash_by_hour']);
         hourly511Chart(hourlyCrash);

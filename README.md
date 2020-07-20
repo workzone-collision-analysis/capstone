@@ -9,4 +9,4 @@ Road construction events are a necessary part of keeping road infrastructure in 
 
 [Predictive Application](https://workzone-collision-predict.herokuapp.com/)
 
-**[Project Report]**
+[Project Report](https://workzone-collision-analysis.github.io/src/report.pdf)

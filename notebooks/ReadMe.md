@@ -30,3 +30,6 @@ Recommended sequence of running notebooks:
 17. wz_01_EDA
 18. wz_02_counting_crashes
 19. wz_03_join_to_511
+20. 511_05_features_EDA
+21. 511_06_clustering
+22. 511_07_clustering_with_length
